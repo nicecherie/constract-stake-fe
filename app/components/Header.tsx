@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { cn } from '../utils/cn'
 import ThemeToggle from './ThemeToggle'
+import WalletConnectButton from './WalletConnectButton'
 
 const Header = () => {
   const Links = [
@@ -54,6 +55,7 @@ const Header = () => {
           })}
         </nav>
         <div className="flex items-center space-x-2">
+          <WalletConnectButton />
           <div className=" items-center space-x-3">
             <ThemeToggle />
           </div>
