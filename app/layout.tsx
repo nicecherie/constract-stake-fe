@@ -11,8 +11,11 @@ import WalletConnectButton from './components/WalletConnectButton'
 import ErrorBoundary from '@/app/components/ErrorBoundary'
 
 export const metadata: Metadata = {
-  title: 'MetaNodeStack',
-  description: 'Welcome to invest in this project'
+  title: 'YY Stake',
+  description: 'Welcome to invest in this project',
+  icons: {
+    icon: '/favicon.svg'
+  }
 }
 
 export default function RootLayout({
