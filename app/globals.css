@@ -132,6 +132,28 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
+  /* 发光效果 */
+  .glow-effect {
+    @apply relative;
+  }
+
+  .glow-effect::after {
+    content: '';
+    @apply absolute -inset-1 bg-gradient-to-r from-red-400 to-orange-500 
+           rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-300;
+    pointer-events: none;
+  }
+
+  .dark .glow-effect::after {
+    @apply opacity-50 group-hover:opacity-100;
+    filter: brightness(1.5);
+  }
+
+  /* 为圆形元素移除方形发光效果 */
+  .glow-effect.rounded-full::after {
+    border-radius: 9999px;
+  }
+
   /* 粒子效果 */
   .particles {
     @apply absolute inset-0 pointer-events-none;

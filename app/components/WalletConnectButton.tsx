@@ -9,11 +9,10 @@ import { FiChevronDown, FiLogOut, FiX } from 'react-icons/fi'
 import ThemeToggle from './ThemeToggle'
 
 const WalletConnectButton = () => {
-  const { address, isConnected } = useAccount()
+  const { address, isConnected, chain } = useAccount()
   const { disconnect } = useDisconnect()
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-
   const handleDisconnect = () => {
     disconnect()
     setIsDropdownOpen(false)
@@ -26,7 +25,7 @@ const WalletConnectButton = () => {
         <div className="flex items-center space-x-2 px-2 py-1.5 sm:px-3 sm:py-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full border-2 border-gray-300/50 dark:border-gray-600/50 shadow-lg">
           <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
           <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 font-medium">
-            Sepolia
+            {chain?.name || 'Sepolia'}
           </span>
         </div>
 

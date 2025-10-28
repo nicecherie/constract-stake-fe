@@ -8,6 +8,7 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import TechBackground from './components/TechBackground'
 import RainbowKitProviders from './components/RainbowKitProvider'
 import WalletConnectButton from './components/WalletConnectButton'
+import ErrorBoundary from '@/app/components/ErrorBoundary'
 
 export const metadata: Metadata = {
   title: 'MetaNodeStack',
@@ -22,33 +23,37 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>
-          <ThemeRegistry>
-            <RainbowKitProviders>
-              <TechBackground>
-                {/* <Header /> */}
+        <ErrorBoundary>
+          <ThemeProvider>
+            <ThemeRegistry>
+              <RainbowKitProviders>
+                <TechBackground>
+                  {/* <Header /> */}
+                  <WalletConnectButton />
+                  <div className="relative flex flex-col flex-grow ">
+                    {children}
+                  </div>
 
-                <WalletConnectButton />
-                {children}
-                <footer className="relative glass-morphism">
-                  <div className="footer max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
-                    <div className="footer-content max-w-7xl flex justify-between items-center px-4 py-2">
-                      <div className="declaration">
-                        © {new Date().getFullYear()} MetaNode Stake. All rights
-                        reserved.🔥✨
-                      </div>
-                      <div className="social hover:text-pink-500">
-                        <a href="https://github.com/nicecherie/constract-stake-fe">
-                          <FiGithub />
-                        </a>
+                  <footer className="relative glass-morphism border-t-2 border-red-200/50 dark:border-gray-700/50 mt-auto">
+                    <div className="footer max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
+                      <div className="footer-content max-w-7xl flex justify-between items-center px-4 py-2">
+                        <div className="declaration">
+                          © {new Date().getFullYear()} MetaNode Stake. All
+                          rights reserved.🔥✨
+                        </div>
+                        <div className="social hover:text-pink-500">
+                          <a href="https://github.com/nicecherie/constract-stake-fe">
+                            <FiGithub />
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </footer>
-              </TechBackground>
-            </RainbowKitProviders>
-          </ThemeRegistry>
-        </ThemeProvider>
+                  </footer>
+                </TechBackground>
+              </RainbowKitProviders>
+            </ThemeRegistry>
+          </ThemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )
