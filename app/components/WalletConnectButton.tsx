@@ -1,5 +1,4 @@
 'use client'
-
 import { useAccount, useDisconnect } from 'wagmi'
 import { CustomConnectButton } from './ui/CustomConnectButton'
 import { motion, AnimatePresence } from 'framer-motion'

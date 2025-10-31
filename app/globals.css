@@ -212,6 +212,41 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
+  .glass-card {
+    @apply rounded-3xl p-8 transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .dark .glass-card:hover {
+    background-color: rgba(17, 24, 39, 0.9);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  /* 火焰按钮样式 */
+  .flame-button {
+    @apply px-6 py-3 bg-gradient-to-r from-red-400 to-orange-500 text-white rounded-2xl 
+           hover:from-red-500 hover:to-orange-600 transition-all duration-300 ease-in-out 
+           shadow-lg hover:shadow-red-500/30 font-semibold border-2 border-white/20
+           hover:transform hover:-translate-y-1 relative overflow-hidden;
+  }
+
+  .flame-button::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0;
+    transform: translateX(-100%);
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .flame-button:hover::before {
+    transform: translateX(100%);
+  }
+
   /* 发光效果 */
   .glow-effect {
     @apply relative;
