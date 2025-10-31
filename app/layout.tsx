@@ -10,6 +10,9 @@ import RainbowKitProviders from './components/RainbowKitProvider'
 import WalletConnectButton from './components/WalletConnectButton'
 import ErrorBoundary from '@/app/components/ErrorBoundary'
 
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 export const metadata: Metadata = {
   title: 'YY Stake',
   description: 'Welcome to invest in this project',
@@ -30,6 +33,20 @@ export default function RootLayout({
           <ThemeProvider>
             <ThemeRegistry>
               <RainbowKitProviders>
+                <ToastContainer
+                  position="top-right"
+                  autoClose={3000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                  toastClassName="custom-toast"
+                  className="custom-toast-body"
+                />
                 <TechBackground>
                   {/* <Header /> */}
                   <WalletConnectButton />
