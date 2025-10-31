@@ -2,6 +2,8 @@ import { getDefaultConfig } from '@rainbow-me/rainbowkit'
 import { http } from 'viem'
 import { sepolia } from 'wagmi/chains'
 
+// from https://cloud.walletconnect.com/
+
 const ProjectId = '9530dc8c532259e3b392b4d86d9044ab'
 
 export const config = getDefaultConfig({
