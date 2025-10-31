@@ -304,146 +304,151 @@ export default function Home() {
             </section>
             {/* 主要操作区域 */}
             <section className="px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20">
-              {/* 质押区域 */}
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="tech-card glass-morphism"
-              >
-                <div className="space-y-6 sm:space-y-8">
-                  {/* 当前质押状态 */}
-                  <div className="text-center mb-6 sm:mb-8">
-                    <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-red-200 to-orange-200 dark:from-gray-600 dark:to-gray-700 rounded-full mb-4 sm:mb-6">
-                      <FiStar className="w-8 h-8 sm:w-10 sm:h-10 text-red-500" />
-                    </div>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-3">
-                      Your Staked Amount
-                    </h2>
-                    <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-500 to-orange-600 bg-clip-text text-transparent">
-                      {parseFloat(poolData.stTokenAmount || '0').toFixed(4)} ETH
-                    </div>
-                  </div>
-                </div>
-
-                {/* 质押输入 */}
-                <div className="space-y-4 sm:space-y-6">
-                  <div>
-                    <label className="block text-base sm:text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
-                      Amount to Stake
-                    </label>
-                    <div className="relative">
-                      <Input
-                        type="number"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                        placeholder="0.0"
-                        className="text-lg sm:text-xl py-4 sm:py-5 pr-20 tech-input"
-                      />
-                      <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 font-medium text-base sm:text-lg">
-                        ETH
-                      </div>
-                    </div>
-                    {balance && (
-                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-3">
-                        Available: {parseFloat(balance.formatted).toFixed(4)}{' '}
-                        ETH
-                      </p>
-                    )}
-                  </div>
-
-                  {/* 质押按钮 */}
-                  <div className="pt-4 sm:pt-6">
-                    {!isConnected ? (
-                      <div className="flex justify-center">
-                        <CustomConnectButton />
-                      </div>
-                    ) : (
-                      <Button
-                        onClick={handleStake}
-                        disabled={loading || !amount}
-                        loading={loading}
-                        className="w-full py-4 sm:py-5 text-lg sm:text-xl flame-button glow-effect"
-                      >
-                        <FiArrowDown className="w-6 h-6 sm:w-7 sm:h-7" />
-                        <span>🔥 Stake ETH 🔥</span>
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* 奖励区域 */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="tech-card glass-morphism"
-              >
-                <div className="space-y-6 sm:space-y-8">
-                  {/* 当前奖励状态 */}
-                  <div className="text-center mb-6 sm:mb-8">
-                    <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-200 to-emerald-200 dark:from-gray-600 dark:to-gray-700 rounded-full mb-4 sm:mb-6">
-                      <FiGift className="w-8 h-8 sm:w-10 sm:h-10 text-green-500" />
-                    </div>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-3">
-                      Pending Rewards
-                    </h2>
-                    <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent">
-                      {parseFloat(rewardsData.pendingReward).toFixed(4)} YY
-                    </div>
-                  </div>
-
-                  {/* 奖励信息 */}
-                  <div
-                    className="border-2 border-purple-200/50 dark:border-gray-600/50
-                   rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8"
+              <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 xl:gap-16">
+                  {/* 质押区域 */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    className="tech-card glass-morphism"
                   >
-                    <div className="flex items-start space-x-3 sm:space-x-4">
-                      <FiInfo className="w-5 h-5 sm:w-6 sm:h-6 text-purple-500 mt-1 flex-shrink-0" />
-                      <div className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">
-                        <p className="font-medium mb-3 text-purple-600 dark:text-purple-400 text-sm sm:text-base">
-                          How rewards work:
-                        </p>
-                        <ul className="space-y-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                          <li className="flex items-start">
-                            <span className="text-purple-500 mr-2">•</span>
-                            Rewards accumulate based on your staked amount and
-                            time
-                          </li>
-                          <li className="flex items-start">
-                            <span className="text-purple-500 mr-2">•</span>
-                            You can claim rewards anytime
-                          </li>
-                          <li className="flex items-start">
-                            <span className="text-purple-500 mr-2">•</span>
-                            Rewards are paid in YY tokens
-                          </li>
-                        </ul>
+                    <div className="space-y-6 sm:space-y-8">
+                      {/* 当前质押状态 */}
+                      <div className="text-center mb-6 sm:mb-8">
+                        <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-red-200 to-orange-200 dark:from-gray-600 dark:to-gray-700 rounded-full mb-4 sm:mb-6">
+                          <FiStar className="w-8 h-8 sm:w-10 sm:h-10 text-red-500" />
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-3">
+                          Your Staked Amount
+                        </h2>
+                        <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-500 to-orange-600 bg-clip-text text-transparent">
+                          {parseFloat(poolData.stTokenAmount || '0').toFixed(4)}{' '}
+                          ETH
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* 领取按钮 */}
-                  <div className="pt-4 sm:pt-6">
-                    {!isConnected ? (
-                      <div className="flex justify-center">
-                        <CustomConnectButton />
+                    {/* 质押输入 */}
+                    <div className="space-y-4 sm:space-y-6">
+                      <div>
+                        <label className="block text-base sm:text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+                          Amount to Stake
+                        </label>
+                        <div className="relative">
+                          <Input
+                            type="number"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                            placeholder="0.0"
+                            className="text-lg sm:text-xl py-4 sm:py-5 pr-20 tech-input"
+                          />
+                          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 font-medium text-base sm:text-lg">
+                            ETH
+                          </div>
+                        </div>
+                        {balance && (
+                          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-3">
+                            Available:{' '}
+                            {parseFloat(balance.formatted).toFixed(4)} ETH
+                          </p>
+                        )}
                       </div>
-                    ) : (
-                      <Button
-                        onClick={handleClaim}
-                        disabled={claimLoading || !canClaim}
-                        loading={claimLoading}
-                        className="w-full py-4 sm:py-5 text-lg sm:text-xl flame-button glow-effect"
+
+                      {/* 质押按钮 */}
+                      <div className="pt-4 sm:pt-6">
+                        {!isConnected ? (
+                          <div className="flex justify-center">
+                            <CustomConnectButton />
+                          </div>
+                        ) : (
+                          <Button
+                            onClick={handleStake}
+                            disabled={loading || !amount}
+                            loading={loading}
+                            className="w-full py-4 sm:py-5 text-lg sm:text-xl flame-button glow-effect"
+                          >
+                            <FiArrowDown className="w-6 h-6 sm:w-7 sm:h-7" />
+                            <span>🔥 Stake ETH 🔥</span>
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* 奖励区域 */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="tech-card glass-morphism"
+                  >
+                    <div className="space-y-6 sm:space-y-8">
+                      {/* 当前奖励状态 */}
+                      <div className="text-center mb-6 sm:mb-8">
+                        <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-200 to-emerald-200 dark:from-gray-600 dark:to-gray-700 rounded-full mb-4 sm:mb-6">
+                          <FiGift className="w-8 h-8 sm:w-10 sm:h-10 text-green-500" />
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-3">
+                          Pending Rewards
+                        </h2>
+                        <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent">
+                          {parseFloat(rewardsData.pendingReward).toFixed(4)} YY
+                        </div>
+                      </div>
+
+                      {/* 奖励信息 */}
+                      <div
+                        className="border-2 border-purple-200/50 dark:border-gray-600/50
+                   rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8"
                       >
-                        <FiGift className="w-6 h-6 sm:w-7 sm:h-7" />
-                        <span>🎁 Claim Rewards 🎁</span>
-                      </Button>
-                    )}
-                  </div>
+                        <div className="flex items-start space-x-3 sm:space-x-4">
+                          <FiInfo className="w-5 h-5 sm:w-6 sm:h-6 text-purple-500 mt-1 flex-shrink-0" />
+                          <div className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                            <p className="font-medium mb-3 text-purple-600 dark:text-purple-400 text-sm sm:text-base">
+                              How rewards work:
+                            </p>
+                            <ul className="space-y-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                              <li className="flex items-start">
+                                <span className="text-purple-500 mr-2">•</span>
+                                Rewards accumulate based on your staked amount
+                                and time
+                              </li>
+                              <li className="flex items-start">
+                                <span className="text-purple-500 mr-2">•</span>
+                                You can claim rewards anytime
+                              </li>
+                              <li className="flex items-start">
+                                <span className="text-purple-500 mr-2">•</span>
+                                Rewards are paid in YY tokens
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* 领取按钮 */}
+                      <div className="pt-4 sm:pt-6">
+                        {!isConnected ? (
+                          <div className="flex justify-center">
+                            <CustomConnectButton />
+                          </div>
+                        ) : (
+                          <Button
+                            onClick={handleClaim}
+                            disabled={claimLoading || !canClaim}
+                            loading={claimLoading}
+                            className="w-full py-4 sm:py-5 text-lg sm:text-xl flame-button glow-effect"
+                          >
+                            <FiGift className="w-6 h-6 sm:w-7 sm:h-7" />
+                            <span>🎁 Claim Rewards 🎁</span>
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
-              </motion.div>
+              </div>
             </section>
           </div>
         </div>
